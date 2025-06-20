@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- Google Fonts (Inter) --- */
+/* Jika kamu ingin menggunakan `next/font`, kamu bisa hapus @import ini dan gunakan import di layout.tsx */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+
+/* --- Remixicon --- */
+@import url('https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css');
+
+/* --- Custom CSS dari index.html lama --- */
+body {
+    /* Font family akan dikelola oleh next/font jika digunakan, atau di sini jika tidak */
+    font-family: 'Inter', sans-serif;
+    background-color: #0a0a0a;
+    color: #a3a3a3;
+}
+.glass-header {
+    background: rgba(10,10,10,0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.post-card:hover .post-card-img {
+    transform: scale(1.05);
+}
+.category-filter-btn {
+    transition: all 0.2s ease-in-out;
+}
+.category-filter-btn.active {
+    background-color: #4f46e5;
+    color: #fff;
+}
+.ad-slot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(23,23,23,0.5);
+    border: 1px dashed #3f3f46;
+    color: #71717a;
+}
+
+/* Glass Card */
+.glass-card {
+    background-color: rgba(23, 23, 23, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Tab Buttons */
+.tab-btn {
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+.tab-btn.active {
+    color: #fff;
+    border-bottom-color: #6366f1; /* Sesuaikan dengan warna indigo-500/600 kamu */
+}
+
+/* Form Input */
+.form-input {
+    background-color: rgba(38, 38, 38, 0.8);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #e5e7eb;
+    border-radius: 0.5rem;
+}
+
+@keyframes fadeInUptoTop {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+    animation: fadeInUptoTop 0.8s ease-out forwards;
+    opacity: 0; /* Hidden by default */
+}
+.animation-delay-200 { animation-delay: 0.2s; }
