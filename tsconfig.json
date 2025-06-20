@@ -22,14 +22,20 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "paths": {
+      "/*": ["./*"],
+      "/components/*": ["./components/*"],
+      "/lib/*": ["./lib/*"]
+    }
   },
   "include": [
+    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "next-env.d.ts",
-    ".next/types/**/*.ts"
-, "tailwind.config.ts"  ],
+    ".next/types/**/*.ts",
+    "tailwind.config.ts"
+  ],
   "exclude": [
     "node_modules"
   ]
