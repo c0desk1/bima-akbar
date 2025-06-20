@@ -22,13 +22,16 @@ interface Post {
 // Fungsi generateStaticParams (Opsional tapi direkomendasikan untuk blog)
 // Ini memungkinkan Next.js untuk pre-render halaman detail post saat build time
 export async function generateStaticParams() {
-  const { data: posts } = await supabase.from('posts').select('slug').eq('published', true);
+  const { data: posts } = await supabase
+    .from('posts')
+    .select('slug')
+    .eq('published', true);
 
-  // Return array of { slug: string } objects
   return posts?.map((post) => ({
-    slug: post.slug,
+    params: { slug: post.slug },
   })) || [];
 }
+
 
 type PageProps = {
   params: {
