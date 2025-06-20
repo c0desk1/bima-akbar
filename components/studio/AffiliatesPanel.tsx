@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import { supabase } from '@/lib/supabase';
-import GlassCard from '@/components/GlassCard';
+import { supabase } from '/lib/supabase';
+import GlassCard from '/components/GlassCard';
 
 interface AffiliateLink {
   id: string;
