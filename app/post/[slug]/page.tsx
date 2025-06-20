@@ -30,7 +30,12 @@ export async function generateStaticParams() {
   })) || [];
 }
 
-export default async function PostPage({ params }: { params: { slug: string } }) {
+type PageProps = {
+  params: {
+    slug: string
+  }
+}
+export default async function Page({ params }: PageProps) {
   const { slug } = params;
 
   // Fetch data post berdasarkan slug
