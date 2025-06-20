@@ -1,60 +1,50 @@
-import { supabase } from '/lib/supabase'; // Import Supabase client
-import { notFound } from 'next/navigation'; // Untuk menampilkan halaman 404
-import Image from 'next/image'; // Untuk optimasi gambar
-import DOMPurify from 'isomorphic-dompurify'; // Untuk sanitasi HTML
+// src/app/post/[slug]/page.tsx (or app/post/[slug]/page.tsx if no src folder)
 
-// Komponen layout dan interaktif
+import { supabase } from '/lib/supabase';
+import { notFound } from 'next/navigation';
+import Image from 'next/image';
+import DOMPurify from 'isomorphic-dompurify'; // Make sure this is installed: npm install isomorphic-dompurify
+
 import Header from '/components/Header';
 import BackToTopButton from '/components/BackToTopButton';
 
-// Type definition untuk Post
 interface Post {
   id: string;
   slug: string;
   title: string;
-  content: string; // Konten HTML dari postingan
+  content: string; // HTML content
   thumbnail_url: string | null;
   category: string | null;
   views: number | null;
   created_at: string;
 }
 
-
-type PageProps = {
-  params: {
-    slug: string
-  }
-}
 export async function generateStaticParams() {
-  const { data: posts } = await supabase
-    .from('posts')
-    .select('slug')
-    .eq('published', true);
+  const { data: posts } = await supabase.from('posts').select('slug').eq('published', true);
 
   return posts?.map((post) => ({
-    params: { slug: post.slug },
+    slug: post.slug,
   })) || [];
 }
 
+// PERUBAHAN UTAMA ADA DI BARIS BAWAH INI
+export default async function PostPage({ params }: { params: { slug: string } }) {
+  // Await the params object before destructuring
+  // This is the fix for the "params should be awaited" error
+  const { slug } = await params; // <--- UBAH BARIS INI MENJADI `await params;`
 
-export default async function Page({ params }: PageProps) {
-  const { slug } = params;
-
-  // Fetch data post berdasarkan slug
+  // Fetch post data
   const { data: post, error } = await supabase
     .from('posts')
     .select('*')
     .eq('slug', slug)
-    .single(); // Ambil hanya satu hasil
+    .single();
 
-  // Jika ada error atau post tidak ditemukan, tampilkan halaman 404
   if (error || !post) {
     console.error("Error fetching post:", error);
-    notFound();
+    notFound(); // Next.js built-in 404
   }
 
-  // Sanitasi konten HTML dari Supabase untuk keamanan (mencegah XSS)
-  // DOMPurify akan membersihkan HTML dan hanya menyisakan tag dan atribut yang aman
   const sanitizedContent = DOMPurify.sanitize(post.content, { USE_PROFILES: { html: true } });
 
   return (
@@ -71,18 +61,15 @@ export default async function Page({ params }: PageProps) {
             <Image
               src={post.thumbnail_url}
               alt={post.title}
-              width={1200} // Sesuaikan dengan ukuran gambar optimal
-              height={675} // Sesuaikan dengan rasio aspek gambar
+              width={1200}
+              height={675}
               className="w-full h-auto object-cover"
-              priority // Prioritaskan gambar ini untuk loading lebih cepat
+              priority
             />
           </div>
         )}
 
-        {/* Render konten HTML yang sudah disanitasi */}
         <div className="prose prose-invert max-w-none text-gray-300 leading-relaxed text-lg" dangerouslySetInnerHTML={{ __html: sanitizedContent }}>
-          {/* Kelas 'prose' dari Tailwind Typography plugin akan styling konten secara otomatis.
-              Jika belum install: npm install -D @tailwindcss/typography */}
         </div>
       </main>
       <BackToTopButton />
