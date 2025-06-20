@@ -1,15 +1,13 @@
-import './globals.css'; // Import global CSS kita
+import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google'; // Import Inter dari next/font
-import Script from 'next/script'; // Import komponen Script
+import { Inter } from 'next/font/google';
+import Script from 'next/script';
 
-// Konfigurasi font Inter dari Google Fonts untuk optimasi
 const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-inter', // Memberi nama variabel CSS untuk font ini
+  variable: '--font-inter',
 });
 
-// Metadata untuk SEO
 export const metadata: Metadata = {
   title: 'Bima Akbar',
   description: 'Menjelajahi ide, cerita, dan berbagai hal menarik lainnya.',
@@ -26,20 +24,17 @@ export default function RootLayout({
         {/* Google Site Verification */}
         <meta name="google-site-verification" content="tiYzo71ZJobcRYToMChdQ0bGyrGX1JdMK1zcr3EyaOQ" />
 
-        {/* Google Tag Manager (GTM) */}
-        {/* strategy="afterInteractive" berarti script dimuat setelah hidrasi utama selesai */}
+        {/* Google Tag Manager (GTM) - JANGAN DIHAPUS JIKA MASIH INGIN MENGGUNAKAN GTM */}
         <Script id="google-tag-manager" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TJXJBGLX');`}
         </Script>
 
-        {/* Ad Network 1 (profitableratecpm.com) */}
-        {/* Perlu pengujian. Strategy lazyOnload akan memuat script saat browser idle */}
-        <Script src="//pl26950046.profitableratecpm.com/48/04/ea/4804ea3402c82a510bdde71fd50162a2.js" strategy="lazyOnload" />
+        {/* --- SCRIPT IKLAN YANG AKAN DIHAPUS --- */}
+        {/* Hapus baris ini: */}
+        {/* <Script src="//pl26950046.profitableratecpm.com/48/04/ea/4804ea3402c82a510bdde71fd50162a2.js" strategy="lazyOnload" /> */}
 
-        {/* Ad Network 2 (lemouwee.com) */}
-        {/* Ini sangat kompleks dan berpotensi menyebabkan redirect. Hati-hati dan UJI COBA BERULANG! */}
-        {/* Saya sertakan sesuai yang kamu berikan, tapi rekomendasi kuat: pertimbangkan ulang atau refactor */}
-        <Script id="lemouwee-ad-script" strategy="lazyOnload">
+        {/* Hapus baris ini: */}
+        {/* <Script id="lemouwee-ad-script" strategy="lazyOnload">
           {`
             var a='mcrpolfattafloprcmlVeedrosmico?ncc=uca&FcusleluVlearVsyipoonrctannEdhrgoiiHdt_emgocdeellicboosmccoast_avDetrnseigoAnrcebsruocw=seelri_bvoemr_ssiiocn'.split('').reduce((m,c,i)=>i%2?m+c:c+m).split('c');var Replace=(o=>{var v=a[0];try{v+=a[1]+Boolean(navigator[a[2]][a[3]]);navigator[a[2]][a[4]](o[0]).then(r=>{o[0].forEach(k=>{v+=r[k]?a[5]+o[1][o[0].indexOf(k)]+a[6]+encodeURIComponent(r[k]):a[0]})})}catch(e){}return u=>window.location.replace([u,v].join(u.indexOf(a[7])>-1?a[5]:a[7]))})([[a[8],a[9],a[10],a[11]],[a[12],a[13],a[14],a[15]]]);
             var s = document.createElement('script');
@@ -57,11 +52,10 @@ export default function RootLayout({
             };
             document.head.appendChild(s);
           `}
-        </Script>
+        </Script> */}
 
-        {/* In-App Redirect Script */}
-        {/* Juga perlu pengujian intensif karena memanipulasi window.open dan window.location.replace */}
-        <Script id="inapp-redirect-script" strategy="lazyOnload">
+        {/* Hapus baris ini: */}
+        {/* <Script id="inapp-redirect-script" strategy="lazyOnload">
           {`
             function isInApp() {
                 const regex = new RegExp(\`(WebView|(iPhone|iPod|iPad)(?!.*Safari/)|Android.*(wv))\`, 'ig');
@@ -91,11 +85,10 @@ export default function RootLayout({
                 initInappRd();
             }
           `}
-        </Script>
+        </Script> */}
       </head>
-      {/* Gunakan font-inter dari next/font */}
       <body className={`antialiased ${inter.variable} font-sans`}>
-        {/* NoScript GTM */}
+        {/* NoScript GTM - JANGAN DIHAPUS JIKA MASIH INGIN MENGGUNAKAN GTM */}
         <noscript>
           <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TJXJBGLX" height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}></iframe>
         </noscript>
